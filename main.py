@@ -20,6 +20,7 @@ pages = math.ceil(num/60)
 print(pages)
 
 all_urls = []
+all_prices = []
 for page in range(1, pages+1):
     url = 'https://www.lamoda.ru/catalogsearch/result/?q='+query+'&sort=price_asc' + '&page=' + str(page)
     print(url)
@@ -37,13 +38,17 @@ for page in range(1, pages+1):
         url = 'https://www.lamoda.ru/' + end_url
         text = text[j:]
         all_urls.append(url)
-print(all_urls)
-print(len(all_urls))
+
+        price_in = text.find('x-product-card-description__price-WEB8507_price_no_bold')
+        text = text[price_in + 30:]
+        price_out = text.find('₽')
+        price = text[:price_out]
+        all_prices.append(price)
+
 
 all_brands = []
 all_articuls = []
 all_countries = []
-all_prices = []
 all_discounts = []
 all_names = []
 
@@ -69,12 +74,6 @@ for n in range(len(all_urls)):
     country = text[:country_out]
     all_countries.append(country)
 
-    price_in = text.find('"price":"')
-    text = text[price_in + 9:]
-    price_out = text.find('"},"original"')
-    price = text[:price_out]
-    all_prices.append(price)
-
     discount_in = text.find('"discount_lamoda_and_loyalty_and_action"')
     if discount_in != -1:
         text = text[discount_in + 41:]
@@ -89,7 +88,7 @@ for n in range(len(all_urls)):
     names_out = text.find('- цвет:')
     name = text[:names_out]
     all_names.append(name)
-
+'''
 print(all_brands)
 print('')
 print(all_articuls)
@@ -110,3 +109,5 @@ df = pd.DataFrame(data)
 
 with open('output.txt', 'w', encoding='utf8') as f_out:
     print(df, file=f_out)
+'''
+print(all_prices)
