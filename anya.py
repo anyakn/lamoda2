@@ -10,7 +10,7 @@ n_out = text.find('товар')
 number = str(text[:n_out])
 print(number)
 
-url1 = 'https://www.lamoda.ru/p/mp002xw0rlgj/bags-keddo-sumka/'
+url1 = 'https://www.lamoda.ru/p/mp002xw0102n/clothes-tvoe-bryuki/'
 r1 = requests.get(url1)
 text1 = r1.text
 with open ('sakd.txt', 'w', encoding='utf-8') as f:
@@ -35,3 +35,20 @@ if discount_in != -1:
 else:
     discount = 0
     print(discount)
+'''
+for page in range(1, pages+1):
+    url = 'https://www.lamoda.ru/catalogsearch/result/?q='+query+'&sort=price_asc' + '&page=' + str(page)
+    print(url)
+    r = requests.get(url)
+    text = r.text
+    if page == pages:
+        l = num - (pages-1)*60
+    for _ in range(l):
+        i = text.find('<div class="x-product-card__card"><a href="')
+        text = text[i + 43:]
+        j = text.find('" class=')
+        end_url = text[:j]
+        url = 'https://www.lamoda.ru/' + end_url
+        text = text[j:]
+        all_urls.append(url)
+'''

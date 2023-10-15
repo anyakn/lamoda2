@@ -20,12 +20,16 @@ pages = math.ceil(num/60)
 print(pages)
 
 all_urls = []
-for page in range(1, pages):
+for page in range(1, pages+1):
     url = 'https://www.lamoda.ru/catalogsearch/result/?q='+query+'&sort=price_asc' + '&page=' + str(page)
     print(url)
     r = requests.get(url)
     text = r.text
-    for _ in range(60):
+    if page == pages:
+        k = num - (pages - 1) * 60
+    else:
+        k = 60
+    for _ in range(k):
         i = text.find('<div class="x-product-card__card"><a href="')
         text = text[i + 43:]
         j = text.find('" class=')
@@ -60,7 +64,7 @@ for n in range(len(all_urls)):
     all_articuls.append(articul)
 
     country_in = text.find('"title":"Страна производства","value":')
-    text1 = text[country_in + 39:]
+    text = text[country_in + 39:]
     country_out = text.find('"')
     country = text[:country_out]
     all_countries.append(country)
