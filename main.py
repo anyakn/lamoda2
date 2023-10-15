@@ -40,7 +40,7 @@ for page in range(1, pages+1):
         all_urls.append(url)
 
         price_in = text.find('x-product-card-description__price-WEB8507_price_no_bold')
-        text = text[price_in + 30:]
+        text = text[price_in+124:]
         price_out = text.find('₽')
         price = text[:price_out]
         all_prices.append(price)
