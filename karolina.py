@@ -1,6 +1,6 @@
 import requests
 
-query = "кепки"
+query = "Мыло для тела"
 query = query.replace(' ', '+')
 query = query.lower()
 
@@ -14,14 +14,14 @@ text = r.text
 
 for _ in range(60):
     i = text.find('<div class="x-product-card__card"><a href="')
-    text = text[i+43:]
+    text = text[i + 43:]
     j = text.find('" class=')
     end_url = text[:j]
     url = 'https://www.lamoda.ru/' + end_url
     text = text[j:]
     all_urls.append(url)
 print(all_urls)
-
+'''
 all_articuls = [] # Найдем артикулы
 for x in range(60):
     url = all_urls[x]
@@ -33,20 +33,24 @@ for x in range(60):
     articul = text[:j]
     all_articuls.append(articul)
 print(all_articuls)
-
-
+'''
 all_names = [] # Найдем названия
 for x in range(60):
     url = all_urls[x]  # Найдем название
     html = requests.get(url)
     text = html.text
-    i = text.find('"seo_title":"')
-    text = text[i + 13:]
-    j = text.find('- цвет:')
+    if text.find('<div class="x-premium-product-title-new__model-name">') == -1:
+        i = text.find('<div class="x-premium-product-title__model-name">')
+        text = text[i + 49:]
+    else:
+        i = text.find('<div class="x-premium-product-title-new__model-name">')
+        text = text[i + 53:]
+    j = text.find('</div></h1><div class')
     name = text[:j]
     all_names.append(name)
 print(all_names)
 
+'''
 import pandas as pd
 
 data = {"Ссылки на товары": all_urls, "Название": all_names, "Артикул": all_articuls}
@@ -68,3 +72,4 @@ text = text[n_in+53:]
 n_out = text.find('товар')
 number = str(text[:n_out])
 print(number)
+'''

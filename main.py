@@ -56,6 +56,17 @@ for n in range(len(all_urls)):
     url = all_urls[n]
     html = requests.get(url)
     text = html.text
+
+    if text.find('<div class="x-premium-product-title-new__model-name">') == -1:
+        names_in = text.find('<div class="x-premium-product-title__model-name">')
+        text = text[names_in + 49:]
+    else:
+        names_in = text.find('<div class="x-premium-product-title-new__model-name">')
+        text = text[names_in + 53:]
+    names_out = text.find('</div></h1><div class')
+    name = text[:names_out]
+    all_names.append(name)
+
     brand_in = text.find(':"Другие товары ')
     text = text[brand_in + 16:]
     brand_out = text.find('","type":"brand"')
@@ -83,12 +94,6 @@ for n in range(len(all_urls)):
         discount = 0
     all_discounts.append(discount)
 
-    names_in = text.find('"seo_title":"')
-    text = text[names_in + 13:]
-    names_out = text.find('- цвет:')
-    name = text[:names_out]
-    all_names.append(name)
-'''
 print(all_brands)
 print('')
 print(all_articuls)
@@ -101,13 +106,12 @@ print(all_discounts)
 print('')
 print(all_names)
 print('')
+'''
+data = {"Ссылки на товары": all_urls, "Название": all_names, "Артикул": all_articuls, "Цена": all_prices,
+        "Скидка": all_discounts, "Бренд":all_brands, "Страна": all_countries}
 
-data = {"Ссылки на товары": all_urls, "Название": all_names, "Артикул": all_articuls, "Цена": all_prices, "Скидка": all_discounts, "Бренд":all_brands, "Страна": all_countries}
-
-# Создаем DataFrame из словаря
 df = pd.DataFrame(data)
 
 with open('output.txt', 'w', encoding='utf8') as f_out:
     print(df, file=f_out)
 '''
-print(all_prices)
