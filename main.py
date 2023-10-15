@@ -106,12 +106,13 @@ print(all_discounts)
 print('')
 print(all_names)
 print('')
-'''
-data = {"Ссылки на товары": all_urls, "Название": all_names, "Артикул": all_articuls, "Цена": all_prices,
-        "Скидка": all_discounts, "Бренд":all_brands, "Страна": all_countries}
+
+data = { "Название": all_names, "Артикул": all_articuls, "Цена": all_prices,
+        "Скидка": all_discounts, "Бренд": all_brands, "Страна": all_countries}
 
 df = pd.DataFrame(data)
 
+pd.set_option('display.max_columns', 7)
+
 with open('output.txt', 'w', encoding='utf8') as f_out:
     print(df, file=f_out)
-'''
