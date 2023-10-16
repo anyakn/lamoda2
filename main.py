@@ -1,8 +1,9 @@
 import pandas as pd
 import requests
 import math
+import local_ru
 
-query = input('Введите запрос: ')
+query = input(qry)
 query = query.replace(' ', '+')
 query = query.lower()
 
@@ -107,8 +108,8 @@ print('')
 print(all_names)
 print('')
 
-data = { "Название": all_names, "Артикул": all_articuls, "Цена": all_prices,
-        "Скидка": all_discounts, "Бренд": all_brands, "Страна": all_countries}
+data = { nm: all_names, art: all_articuls, pr: all_prices,
+        dsc: all_discounts, brd: all_brands, cr: all_countries}
 
 df = pd.DataFrame(data)
 pd.set_option('display.max_columns', 7)
