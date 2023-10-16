@@ -1,9 +1,9 @@
 import pandas as pd
 import requests
 import math
-import local_ru
+import local_ru as ru
 
-query = input(qry)
+query = input(ru.qry)
 query = query.replace(' ', '+')
 query = query.lower()
 
@@ -108,8 +108,8 @@ print('')
 print(all_names)
 print('')
 
-data = { nm: all_names, art: all_articuls, pr: all_prices,
-        dsc: all_discounts, brd: all_brands, cr: all_countries}
+data = { ru.nm: all_names, ru.art: all_articuls, ru.pr: all_prices,
+        ru.dsc: all_discounts, ru.brd: all_brands, ru.cr: all_countries}
 
 df = pd.DataFrame(data)
 pd.set_option('display.max_columns', 7)
