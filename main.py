@@ -111,7 +111,6 @@ data = { "Название": all_names, "Артикул": all_articuls, "Цен�
         "Скидка": all_discounts, "Бренд": all_brands, "Страна": all_countries}
 
 df = pd.DataFrame(data)
-
 pd.set_option('display.max_columns', 7)
 
 with open('output.txt', 'w', encoding='utf8') as f_out:
