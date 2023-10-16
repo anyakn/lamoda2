@@ -1,3 +1,9 @@
+'''
+Кнопова Анна-
+Каролина Балан -
+Шилкова Ульяна - 50 б.
+'''
+
 import pandas as pd
 import requests
 import math
